@@ -2,6 +2,8 @@
 
 namespace NW\WebService\References\Operations\Notification;
 
+use NW\WebService\References\Operations\Notification\exceptions\ObjectNotFoundException;
+
 /**
  * @property Seller $Seller
  */
@@ -11,10 +13,16 @@ class Contractor
     public $id;
     public $type;
     public $name;
+    public $mobile;
 
-    public static function getById(int $resellerId): self
+    /**
+     * @param int $resellerId
+     * @return static
+     * @throws ObjectNotFoundException
+     */
+    public static function getById(int $resellerId): static
     {
-        return new self($resellerId); // fakes the getById method
+        return new static($resellerId); // fakes the getById method
     }
 
     public function getFullName(): string
@@ -57,7 +65,7 @@ abstract class ReferencesOperation
     }
 }
 
-function getResellerEmailFrom()
+function getResellerEmailFrom($resellerId)
 {
     return 'contractor@example.com';
 }
